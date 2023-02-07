@@ -1,5 +1,25 @@
-import '@testing-library/jest-dom'
-import { calculateWinner } from './Board'
+import Board, { calculateWinner } from './Board'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+test('Borad コンポーネントのテスト', async () => {
+  const spy = vi.fn()
+  render(<Board squares={[]} xIsNext={true} onPlay={spy} />)
+
+  /**
+   * 左上のマスをクリック
+   * | X |   |   |
+   * |   |   |   |
+   * |   |   |   |
+   */
+  await userEvent.click(screen.getAllByRole('button')[0])
+
+  // スパイが呼ばれたか?
+  expect(spy).toHaveBeenCalled()
+
+  // スパイモックをクリアする
+  spy.mockRestore()
+})
 
 test('calculateWinner() 関数のテスト', () => {
   /**
