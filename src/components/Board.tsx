@@ -51,7 +51,7 @@ export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
   );
 }
 
-function calculateWinner(squares: Player[]) {
+export function calculateWinner(squares: Player[]) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
